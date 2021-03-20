@@ -1,15 +1,30 @@
 import React, {Component } from 'react';
-
+import ReactDOM from 'react-dom';
 
 class Modal extends Component {
 
+    constructor(props) {
+        super(props)
+
+        this.popUpContainer = document.createElement('div');
+        
+        document.body.appendChild(this.popUpContainer);
+    }
+
+    componentWillUnmount() {
+        document.body.removeChild(this.popUpContainer);
+    }
+    
+    
     render() {
-        return (
-            <div className="modal">
+        return ReactDOM.createPortal(
+            <div className="modal" onClick={this.props.close}>
                 <div>
-                    Hello world
+                    <p>lorem ipsum dolor , djfsdk fdsfjsd flsdfjsdlk fsldfj sdlf lsdfjsdkf dslfjsd lf sdlkfjsd lkfsdjf sdlfjsd flsdjq fks dsd</p>
+                    <button>Fermer</button>
                 </div>
-            </div>
+            </div>,
+           this.popUpContainer
         )
     }
 }
